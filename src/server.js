@@ -9,6 +9,9 @@ app.use(express.json())
 const login = require('./routes/RouterLogin')
 app.use('/login', login)
 
+const user = require('./routes/RouterUser')
+app.use('/users', user)
+
 // SUBINDO O SERVIDOR NA PORTA 3000
 const PORT = 3000
 app.listen(PORT, () => {
