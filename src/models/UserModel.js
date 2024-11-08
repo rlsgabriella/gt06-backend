@@ -15,7 +15,7 @@ let UserModel = connection.define ( 'user', {
         allowNull: false
     },
     password: {
-        type: DataTypes.STRING(50),
+        type: DataTypes.STRING(300),
         allowNull: false
     }
 });
