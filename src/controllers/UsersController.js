@@ -20,6 +20,9 @@ const UsersCreate = async (req, res, next) => {
         const email = req.body.email
         const password = req.body.password
 
+        // const emailValid = await userModel.findOne({ where: { email: email } });
+
+
         // CRIPTOGRAFANDO A SENHA DO USUÁRIO PARA SALVAR NO BANCO
         const bcrypt = require('bcrypt')
         const saltRound = 10
@@ -34,7 +37,7 @@ const UsersCreate = async (req, res, next) => {
         
         res.status(201).send({
             'sucess': true,
-            'message': ` Usuário criado com sucesso! ID: ${user.id - user.name}`
+            'message': `Usuário criado com sucesso! ID: ${user.id - user.name}`
         })
 
     } catch (error) {
@@ -47,7 +50,29 @@ const UsersCreate = async (req, res, next) => {
     }
 }
 
+
+const UsersUpdate = async( req, res, next ) => {
+    try{
+        const id = req.params.id
+        const user = await userModel.update(req.body, {
+            where: { id }
+        })
+
+        res.status(201).send({
+            'sucess': true,
+            'message': `Usuário alterado com sucesso! ID: ${user.id - user.name}`
+        })
+
+    } catch (error) {
+        res.send({
+            'success':false,
+            'error':`erro na requisicao ${error}`
+        })
+    }
+}
+
 module.exports = {
     UsersList,
-    UsersCreate
+    UsersCreate,
+    UsersUpdate
 }
