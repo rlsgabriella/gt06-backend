@@ -5,13 +5,16 @@ const app = express()
 // PERMITE QUE O SERVIDOR ENTENDA JSON NO CORPO DAS REQUISIÇÕES
 app.use(express.json())
 
+const { Model } = require('sequelize')
 // EXPORTAR ROTAS
 const login = require('./routes/RouterLogin')
 app.use('/login', login)
 
 const user = require('./routes/RouterUser')
-const { Model } = require('sequelize')
 app.use('/users', user)
+
+const products = require('./routes/RouterProduct')
+app.use('/products', products)
 
 // SUBINDO O SERVIDOR NA PORTA 3000
 const PORT = 3000

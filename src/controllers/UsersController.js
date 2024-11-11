@@ -58,9 +58,29 @@ const UsersUpdate = async( req, res, next ) => {
             where: { id }
         })
 
-        res.status(201).send({
+        res.status(200).send({
             'sucess': true,
             'message': `Usuário alterado com sucesso! ID: ${user.id - user.name}`
+        })
+
+    } catch (error) {
+        res.send({
+            'success':false,
+            'error':`erro na requisicao ${error}`
+        })
+    }
+}
+
+const UsersDelete = async( req, res, next ) => {
+    try {
+        const id = req.params.id
+        const user = await userModel.destroy({
+            where: { id }
+        })
+
+        res.status(200).send({
+            'sucess': true,
+            'message': `Usuário deletado com sucesso! ID: ${user.id - user.name}`
         })
 
     } catch (error) {
@@ -74,5 +94,6 @@ const UsersUpdate = async( req, res, next ) => {
 module.exports = {
     UsersList,
     UsersCreate,
-    UsersUpdate
+    UsersUpdate,
+    UsersDelete
 }
